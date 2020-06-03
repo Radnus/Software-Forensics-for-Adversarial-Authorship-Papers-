@@ -1,0 +1,276 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
+
+\bibitem[\protect\citeauthoryear{Balakrishnan and Reps}{Balakrishnan and
+  Reps}{2010}]%
+        {Balakrishnan2010Wysinwyx}
+{Gogul Balakrishnan} {and} {Thomas Reps}. 2010.
+\newblock \showarticletitle{WYSINWYX: What you see is not what you eXecute}.
+\newblock {\em ACM Transactions on Programming Languages and Systems\/} {32}, 6
+  (8 2010), 1--84.
+\newblock
+\showISSN{01640925}
+
+
+\bibitem[\protect\citeauthoryear{Barat, Prelipcean, and Gavriluţ}{Barat
+  et~al\mbox{.}}{2013}]%
+        {Barat2013Study}
+{Marius Barat}, {Dumitru-Bogdan Prelipcean}, {and} {Dragoş~Teodor Gavriluţ}.
+  2013.
+\newblock \showarticletitle{A study on common malware families evolution in
+  2012}.
+\newblock {\em Journal of Computer Virology and Hacking Techniques\/} {9}, 4
+  (10 2013), 171--178.
+\newblock
+\showISSN{2263-8733}
+
+
+\bibitem[\protect\citeauthoryear{Brumley, Jager, Avgerinos, and
+  Schwartz}{Brumley et~al\mbox{.}}{2011}]%
+        {Brumley2011Bap}
+{David Brumley}, {Ivan Jager}, {Thanassis Avgerinos}, {and} {Edward~J.
+  Schwartz}. 2011.
+\newblock \showarticletitle{BAP: a binary analysis platform}, In Computer Aided
+  Verification. {\em Computer Aided Verification\/} (7 2011), 463--469.
+\newblock
+\showISBNx{978-3-642-22109-5}
+
+
+\bibitem[\protect\citeauthoryear{Cavusoglu, Cavusoglu, and Zhang}{Cavusoglu
+  et~al\mbox{.}}{2006}]%
+        {Cavusoglu2006Economics}
+{Huseyin Cavusoglu}, {Hasan Cavusoglu}, {and} {Jun Zhang}. 2006.
+\newblock Economics of Security Patch Management.
+\newblock   (2006).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chikofsky and Cross}{Chikofsky and
+  Cross}{1990}]%
+        {Chikofsky1990Reverse}
+{E.J. Chikofsky} {and} {J.H. Cross}. 1990.
+\newblock \showarticletitle{Reverse engineering and design recovery: a
+  taxonomy}.
+\newblock {\em IEEE Software\/} {7}, 1 (1 1990), 13--17.
+\newblock
+\showISSN{0740-7459}
+
+
+\bibitem[\protect\citeauthoryear{Dullien and Rolles}{Dullien and
+  Rolles}{2005}]%
+        {Dullien2005GraphBased}
+{Thomas Dullien} {and} {Rolf Rolles}. 2005.
+\newblock \showarticletitle{Graph-based comparison of Executable Objects}, In
+  Sécurité des Technologies de l’Information et des Communications (SSTIC).
+  {\em Sécurité des Technologies de l’Information et des Communications
+  (SSTIC)\/} (2005).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Eagle}{Eagle}{2011}]%
+        {Eagle2011Ida}
+{Chris Eagle}. 2011.
+\newblock {\em The IDA Pro Book: The Unofficial Guide to the World's Most
+  Popular Disassembler}.
+\newblock No Starch Press, San Francisco. 672 pages.
+\newblock
+\showISBNx{1593272898}
+
+
+\bibitem[\protect\citeauthoryear{Economou}{Economou}{2009}]%
+        {Economou2009Heuristics}
+{Nicolas Economou}. 2009.
+\newblock \showarticletitle{Heuristics applied to Binary Diffing}, In EkoParty.
+  {\em EkoParty\/} (2009).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Eilam}{Eilam}{2005}]%
+        {Eilam2005Reversing}
+{Eldad Eilam}. 2005.
+\newblock {\em Reversing: Secrets of Reverse Engineering}.
+\newblock Wiley. 624 pages.
+\newblock
+\showISBNx{0764574817}
+
+
+\bibitem[\protect\citeauthoryear{Flake}{Flake}{2004}]%
+        {Flake2004Structural}
+{Halvar Flake}. 2004.
+\newblock \showarticletitle{Structural Comparison of Executable Objects}, In
+  Detection of Intrusions and Malware \& Vulnerability Assessment (DIMVA), GI
+  SIG SIDAR Workshop. {\em Detection of Intrusions and Malware \& Vulnerability
+  Assessment (DIMVA), GI SIG SIDAR Workshop\/}  {46} (2004), 161--173.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Fluri, Wuersch, PInzger, and Gall}{Fluri
+  et~al\mbox{.}}{2007}]%
+        {Fluri2007Change}
+{Beat Fluri}, {Michael Wuersch}, {Martin PInzger}, {and} {Harald Gall}. 2007.
+\newblock \showarticletitle{Change Distilling:Tree Differencing for
+  Fine-Grained Source Code Change Extraction}.
+\newblock {\em IEEE Transactions on Software Engineering\/} {33}, 11 (11 2007),
+  725--743.
+\newblock
+\showISSN{0098-5589}
+
+
+\bibitem[\protect\citeauthoryear{Folwer}{Folwer}{1999}]%
+        {Folwer1999Refactoring}
+{Martin Folwer}. 1999.
+\newblock {\em Refactoring: Improving the Design of Existing Code}.
+\newblock Addison-Wesley Professional. 464 pages.
+\newblock
+\showISBNx{0201485672}
+
+
+\bibitem[\protect\citeauthoryear{Gao, Reiter, and Song}{Gao
+  et~al\mbox{.}}{2008}]%
+        {Gao2008Binhunt}
+{Debin Gao}, {Michael~K Reiter}, {and} {Dawn Song}. 2008.
+\newblock \showarticletitle{BinHunt : Automatically Finding Semantic
+  Differences in Binary Programs}.
+\newblock {\em International Conference on Information and Communication
+  Security\/} (2008), 238--255.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hirschberg}{Hirschberg}{1977}]%
+        {Hirschberg1977Algorithms}
+{Daniel~S. Hirschberg}. 1977.
+\newblock \showarticletitle{Algorithms for the Longest Common Subsequence
+  Problem}.
+\newblock {\it J. ACM} {24}, 4 (10 1977), 664--675.
+\newblock
+\showISSN{00045411}
+
+
+\bibitem[\protect\citeauthoryear{Hunt and Szymanski}{Hunt and
+  Szymanski}{1977}]%
+        {Hunt1977Fast}
+{James~W. Hunt} {and} {Thomas~G. Szymanski}. 1977.
+\newblock \showarticletitle{A fast algorithm for computing longest common
+  subsequences}.
+\newblock {\it Commun. ACM} {20}, 5 (5 1977), 350--353.
+\newblock
+\showISSN{00010782}
+
+
+\bibitem[\protect\citeauthoryear{Jiang and Zhou}{Jiang and Zhou}{2013}]%
+        {Jiang2013Android}
+{Xuxian Jiang} {and} {Yajin Zhou}. 2013.
+\newblock {\em Android Malware}.
+\newblock Springer New York, New York, NY. 44 pages.
+\newblock
+\showISBNx{978-1-4614-7393-0}
+
+
+\bibitem[\protect\citeauthoryear{Kagdi, Collard, and Maletic}{Kagdi
+  et~al\mbox{.}}{2007}]%
+        {Kagdi2007Survey}
+{Huzefa Kagdi}, {Michael~L. Collard}, {and} {Jonathan~I. Maletic}. 2007.
+\newblock \showarticletitle{A survey and taxonomy of approaches for mining
+  software repositories in the context of software evolution}.
+\newblock {\em Journal of Software Maintenance and Evolution: Research and
+  Practice\/} {19}, 2 (3 2007), 77--131.
+\newblock
+\showISSN{1532060X}
+
+
+\bibitem[\protect\citeauthoryear{Maletic and Collard}{Maletic and
+  Collard}{2004}]%
+        {Maletic2004Supporting}
+{J.I. Maletic} {and} {M.L. Collard}. 2004.
+\newblock \showarticletitle{Supporting source code difference analysis}, In
+  20th IEEE International Conference on Software Maintenance, 2004.
+  Proceedings. {\em 20th IEEE International Conference on Software Maintenance,
+  2004. Proceedings.\/} (2004), 210--219.
+\newblock
+\showISBNx{0-7695-2213-0}
+\showISSN{1063-6773}
+
+
+\bibitem[\protect\citeauthoryear{Miller and Myers}{Miller and Myers}{1985}]%
+        {Miller1985File}
+{Webb Miller} {and} {Eugene~W. Myers}. 1985.
+\newblock \showarticletitle{A file comparison program}.
+\newblock {\em Software: Practice and Experience\/} {15}, 11 (11 1985),
+  1025--1040.
+\newblock
+\showISSN{00380644}
+
+
+\bibitem[\protect\citeauthoryear{Oh}{Oh}{2009}]%
+        {Oh2009Fight}
+{Jeongwook Oh}. 2009.
+\newblock \showarticletitle{Fight against 1-day exploits : Diffing Binaries vs
+  Anti-diffing Binaries}, In Black Hat. {\em Black Hat\/} (2009).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Schwartz, Avgerinos, and Brumley}{Schwartz
+  et~al\mbox{.}}{2010}]%
+        {Schwartz2010All}
+{Edward~J. Schwartz}, {Thanassis Avgerinos}, {and} {David Brumley}. 2010.
+\newblock \showarticletitle{All You Ever Wanted to Know about Dynamic Taint
+  Analysis and Forward Symbolic Execution (but Might Have Been Afraid to Ask)}.
+\newblock {\em 2010 IEEE Symposium on Security and Privacy\/} (2010), 317--331.
+\newblock
+\showISBNx{978-1-4244-6894-2}
+
+
+\bibitem[\protect\citeauthoryear{Thummalapenta, Cerulo, Aversano, and
+  Di~Penta}{Thummalapenta et~al\mbox{.}}{2009}]%
+        {Thummalapenta2009Empirical}
+{Suresh Thummalapenta}, {Luigi Cerulo}, {Lerina Aversano}, {and} {Massimiliano
+  Di~Penta}. 2009.
+\newblock \showarticletitle{An empirical study on the maintenance of source
+  code clones}.
+\newblock {\em Empirical Software Engineering\/} {15}, 1 (3 2009), 1--34.
+\newblock
+\showISSN{1382-3256}
+
+
+\bibitem[\protect\citeauthoryear{Wang, Pierce, and McFarling}{Wang
+  et~al\mbox{.}}{2000}]%
+        {Wang2000Bmat}
+{Zheng Wang}, {Ken Pierce}, {and} {Scott McFarling}. 2000.
+\newblock \showarticletitle{BMAT - A Binary Matching Tool for Stale Profile
+  Propagation}.
+\newblock {\em Journal of Instruction-Level Parallelism\/}  {2} (2000).
+\newblock
+
+
+\end{thebibliography}
