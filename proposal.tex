@@ -51,7 +51,7 @@
 %\professor{David Umphress, Chair, Senior Advisor, Auburn Cyber Research Center}
 %\professor{Daniel Tauritz, Associate Professor of Computer Science and Software Engineering}
 %\professor{James Cross, Professor of Computer Science and Software Engineering}
-%\professor{Drew Springall, Assistant Professor of Computer Science and Software Engineering~~~Michael Hamilton, Assistant Professor of Electrical and Computer Engineering}
+%\professor{Drew Springall, Assistant Professor of Computer Science and Software Engineering}
 
 \begin{document}
 \begin{romanpages}      % roman-numbered pages 
@@ -318,44 +318,46 @@ DU comments onlast sentence "ok...so what does this have to do with you?  Need a
 %**********************************************************************
 \chapter{Proposed Solution}
 \label{chap:three}
-This research proposes applying multidimensional software correlation concepts augmented with domain information from the Lockheed Martin Cyber Kill Chain \cite{hutchins2011intelligence}, MITRE ATT&CK framework \cite{strom2018mitre}, and National Vulnerability Database (NVD) \cite{zhang2011empirical}.    
+This research proposes applying multidimensional software correlation concepts augmented with domain information from the Lockheed Martin Cyber Kill Chain \cite{hutchins2011intelligence}, MITRE ATT\&CK framework \cite{strom2018mitre}, and National Vulnerability Database (NVD) \cite{zhang2011empirical} to apply authorship attribution.    
 
-The Lockheed Martin Cyber Kill Chain allows analysis to take place at different stages with the natural cycle of a cyber attack without having to start from the beginning.  This is important because of the increased use of separate teams for areas of specialty that support the same mission.  Additionally, the state of digital security is such that most intermediate and advanced cyber threat actors are not found to have compromised a system for an extended period of time from when reconnaissance started.  There are the seven steps of the Cyber Kill Chain that describe the actions of a cyber threat: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control (C2), and Actions on Objectives \cite{martin2014cyber}.
+We propose applying inputs into a framework made up of the Cyber Kill Chain, MITRE ATT&CK knowledge base, and NVD in order to apply multidimensional software correlation.  These inputs will be in both structured and unstructured form that describe semantic details of malicious software, network path, and other details that describe a cyber threat's actions.  Analysis will be done to these inputs and a level of confidence will be applied or updated based on the information.  Based on that level of confidence, the analysts will better be able to identify unique capabilities and infrastructure within malicious software artifacts and apply better authorship attribution.  Using forensic software analysis to determine the function and motivation between malicious software examples can allow for the syntactic differences in implementations to be discarded, but be able to focus on the program's mapped semantic characteristics to determine origin and a potential future path.
+
+The base of this tiered framework for multidimensional correlation is needed to allow analysis to be applied from multiple inputs across a timeline of events.  The Lockheed Martin Cyber Kill Chain allows analysis to take place at different stages with the natural cycle of a cyber attack without having to start from the beginning.  This is important because of the increased use of separate teams for areas of specialty that support the same mission.  Additionally, the state of digital security is such that most intermediate and advanced cyber threat actors are not found to have compromised a system for an extended period of time from when reconnaissance started.  There are the seven steps of the Cyber Kill Chain that describe the actions of a cyber threat: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control (C2), and Actions on Objectives \cite{martin2014cyber}.
 
 ``The MITRE ATT&CK knowledge base describes cyber adversary behavior and provides a common taxonomy for both offense and defense. It has become a useful tool across many cyber security disciplines to convey threat intelligence, perform testing through red teaming or adversary emulation, and improve network and system defenses against intrusions"  \cite{strom2018mitre}.   This framework can also be used to assist in the application of providence for the tactics and techniques to be define as adversarial behaviors within a lifecycle to a degree where they can be more effectively mapped to attribution.  The MITRE ATT&CK framework provides a granular view of the Delivery, Exploitation, Installation, C2 , and effects within the Cyber Kill Chain. 
 
 The National Vulnerability Database (NVD) is a synchronized and searchable database of publicly disclosed cybersecurity vulnerabilities and exposures \cite{NIST_NVD:2020}.  The NVD consists of Common Vulnerabilities and Exposures (CVE) entries and is extended to include additional data such as fix information, severity scores, and impact ratings. As part of its enhanced information, NVD also provides advanced searching features such as by OS; by vendor name, product name, and/or version number; and by vulnerability type, severity, related exploit range, and impact.
 
-We propose applying inputs into a framework made up of the Cyber Kill Chain, MITRE ATT&CK knowledge base, and NVD in order to apply multidimensional software correlation.  These inputs will be in both structured and unstructured form that describe semantic details of malicious software, network path, and other details that describe a cyber threat's actions.  Analysis will be done to these inputs and a level of confidence will be applied or updated based on the information.  Based on that level of confidence, the analysts will better be able to identify unique capabilities and infrastructure within malicious software artifacts and apply better authorship attribution.  Using forensic software analysis to determine the function and motivation between malicious software examples can allow for the syntactic differences in implementations to be discarded, but be able to focus on the program's mapped semantic characteristics to determine origin and a potential future path.
 
 \section{Research Goals}
-The primary goal of this research is to apply augmented intelligence techniques based on validated cyber threat intelligence and leverage the combined frameworks to enable forensic software analysis to increase confidence in applying cyber threat attribution.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports, using the distributional semantics technique of Natural Language Processing (NLP), show a precision rate of 83 percent \cite{noor2019machine}.  We aim to increase the rate of precision for authorship attribution of malicious software samples by applying multidimensional analysis of inputs in order to apply attribution at greater levels of confidence.  A secondary goal of this research is to explore the areas of analyzing current and projecting future complexity of malicious software and linage of authors.  
+The primary goal of this research is to apply augmented intelligence techniques to increase confidence in applying cyber threat attribution.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports, using the distributional semantics technique of Natural Language Processing (NLP), show a precision rate of 83 percent \cite{noor2019machine}.  We aim to increase the rate of precision for authorship attribution of malicious software samples by applying multidimensional analysis of inputs in order to apply attribution at greater levels of confidence.  A secondary goal of this research is to explore the areas of analyzing current and projecting future complexity of malicious software and linage of authors.  
 
 \begin{comment}
 DU comment on research goals "I don't know what this says" = 'map semantic data models in order to determine the linage of malicious software.'  Also, what does 'non-standard environments' "mean?"
 	Map data models to apply?
 
 What is the major contribution?  What is the CS link to changing the world?
+
+20200722 - Pulled from first sentence of Research Goals "based on validated cyber threat intelligence and leverage the combined frameworks to enable forensic software analysis"
 \end{comment}
 
 \section{Research Idea}
-The novelty of this research is in first, determining the role authorship plays in the similarity factor of software artifacts, and second, projecting the trajectory of of behavior based on the providence of artifacts attributed to a specific author.  Black box analysis of a particular software's attributes can be used to to map relations between known and unknown cyber threats.  If similar attributes are found from two or more different examples, then similarities can be drawn between their capabilities, infrastructure, and behavior that better describe their providence.  The same black box analysis will also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method, when combined inside of a novel threat framework, can apply deeper connections that be can use to increase the confidence level of applying cyber threat attribution.  In other words, the idea of applying augment intelligence using a novel threat framework can increase the speed and accuracy of applying cyber threat attribution and also more accurately identify and project the trajectory of malware.
+The novelty of this research is in first, determining the role authorship plays in the similarity factor of software artifacts, and second, projecting the trajectory of behavior based on the providence of artifacts attributed to a specific author.  Black box analysis of a particular software's attributes can be used to to map relations between known and unknown cyber threats.  If similar attributes are found from two or more different examples, then their capabilities, infrastructure, and behavior can be used to describe their providence.  The same black box analysis can also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method, when combined inside of a novel threat framework, can apply deeper connections that be can used to increase the confidence level of applying cyber threat attribution.  In other words, the idea of applying augment intelligence using a novel threat framework can increase the speed and accuracy of applying cyber threat attribution and also more accurately identify and project the trajectory of malware.
 
 We plan to tailor the research to cyber threat actors with known characteristics by first linking actions and tools that fall within the framework to a signature of mapped attributes in order to determine providence and provide further matches or changes within these characteristics.  This idea is similar to how \cite{oh2009fight} used variable-length fingerprints across a series of instructions to describe how data is used within a function or basic block.  The order and path of data transformations are important and uniquely identifiable, such as in the same way that an mystery author's work can be identified because of key characteristics.  
 
-A focus has been made to standardized formats of Cyber Threat Information (CTI) in order to increase data sharing.  The Malware Information Sharing Platform (MISP) is an open source platform that can be used for gathering, sharing, storing, and correlating a number of structured and unstructured inputs about cyber threats \cite{MISP}.  Examples of common MISP feeds are Indicators of Compromise of targeted attacks, threat intelligence, financial fraud information, and vulnerability information.  We will use the MISP platform for collection and analysis of inputs of authorship attribution based on levels of confidence.  Data from this platform we will will be used to create training data for an augmented intelligence system that leverages Natural Language Processing.
-
--  &
-Open Standards For Threat Information Sharing
+A focus has been made to standardized formats of Cyber Threat Information (CTI) in order to increase data sharing.  The Malware Information Sharing Platform (MISP) is an open source platform that can be used for gathering, sharing, storing, and correlating a number of structured and unstructured inputs about cyber threats \cite{MISP}.  Examples of common MISP feeds are Indicators of Compromise of targeted attacks, threat intelligence, financial fraud information, and vulnerability information.  We will use the MISP platform for collection and analysis of inputs of authorship attribution based on levels of confidence.  Data from this platform will be used to create training data for an augmented intelligence system that leverages Natural Language Processing.
 
 \begin{comment}
 DU comments on last paraphgraph within 'Research Idea' = "while this is a good 100k-foot descroption, we need a more deailed explanation"
 
 	DU = Change reference display from '[Oh 2009]' to "Oh [2009]"
+	
+20200722 - Open Standards For Threat Information Sharing
 \end{comment}
 
 \section{Research Hypothesis} 
-The research hypothesis is ``the multidimensional software correlation mapping technique will be more than 83\% accurate in applying cyber threat attribution when at a confidence level of 75\% or greater''. The null hypothesis of this research will seek to disprove is ``the multidimensional software correlation mapping technique will preform equal to or worse than 83\% accurate in applying cyber threat attribution when at a confidence level of 75\% or greater''.
+The research hypothesis is ``the multidimensional software correlation mapping technique will be more accurate than existing methods in applying cyber threat attribution when at a confidence level of high''. The null hypothesis of this research will seek to disprove is ``the multidimensional software correlation mapping technique will preform equal to or worse than existing methods in applying cyber threat attribution when at a confidence level of high''.
 
 \begin{comment}
 
@@ -370,7 +372,7 @@ DU "think of a hypothesis as being a metric by which you will know when you are 
 \end{comment}
 
 \section{Validation}
-The process described in this section will be used to validate the research of applying multidimensional software correlation within a novel framework to authorship attribution.  Data from 13 sources will be ingested into the analytical platform.  Below is a table that describes the format and source.  Additionally figure 3.1 show a an overlap analysis of the common data found within the 13 feeds.
+Data from 13 sources will be ingested into the analytical platform.  Below is a table that describes the format and source.  Additionally figure 3.1 shows a an overlap analysis of the common data found within the 13 feeds.
 
 \begin{table}[]
 \begin{tabular}{lll}
@@ -398,9 +400,9 @@ freetext & sans.edu       & https://isc.sans.edu/feeds/topips.txt
 	\label{fig:MISP Feed Overlap}
 \end{figure}
 
-The novel framework described earlier in the paper based upon the a tired foundation will be used to apply analysis to like inputs.  The Cyber Kill Chain will be used to describe a threats actions in terms of a foundation based on the stages of reconnaissance, exploitation, and effects.  The MITRE ATTACK framwork will be used to describe specific action within the stage of exploitation.  And vulnerability details will be applied form the NVD.
+The novel framework described earlier in the paper based upon a tiered foundation will be used to apply analysis to like inputs.  The Cyber Kill Chain will be used to describe a threats actions in terms of a foundation based on the stages of reconnaissance, exploitation, and effects.  The MITRE ATT\&CK framework will be used to describe specific action within the stage of exploitation.  Vulnerability details will be applied form input from the NVD.
 
-From this framework training data will be exported to a augmented intelligence platform designed for NLP and training will take place to enable authorship attribution above 83\% to take place at or above a confidence level of 75\%.  A separate and disconnected MISP instance will be used to validate the results.
+From this framework, training data will be exported to a augmented intelligence platform designed for NLP and training will take place to enable authorship attribution above 83\% to take place at or above a confidence level of 75\%.  A separate and disconnected MISP instance will be used to validate the results.
 
 \begin{comment}
 
