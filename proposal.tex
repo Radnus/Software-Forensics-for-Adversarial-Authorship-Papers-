@@ -20,6 +20,7 @@
 \usepackage{comment}
 \usepackage{adjustbox}
 \usepackage{outlines}
+\usepackage[table]{xcolor}
 %\usepackage{natbib}
 %%%%%Format rules: Normal margins are 1 in. If you need to print with 1.5in margins, uncomment the line below
 %\oddsidemargin0.5in \textwidth6in
@@ -36,12 +37,12 @@
 \newtheorem{theorem}{Theorem}[chapter]
 
 % Put the title, author, and date in. 
-\title{Software Forensics for Adversarial Authorship}
+\title{Computational Efficiency of Software Forensics for Adversarial Authorship}
 \author{Rodney Visser} 
-\date{[Insert date of graduation, e.g., Dec 17, 2021]} %date of graduation
-\copyrightyear{2021} %copyright year
+\date{[Insert date of graduation, e.g., Aug 1, 2022]} %date of graduation
+\copyrightyear{2022} %copyright year
 
-\keywords{Software Forensics, Threat TTPs, Digital Provenance, Machine Learning, Recurrent Neural Networks, Convolutional Neural Networks, Threat Intelligence, Authorship Attribution}
+\keywords{Software Forensics, Threat TTPs, Digital Provenance, Machine Learning, Deep Neural Networks, Random Forrest Classifier, Threat Intelligence, Authorship Attribution}
 
 % Put the Thesis Adviser here. 
 \adviser{David Umphress}
@@ -328,19 +329,57 @@ DU comments onlast sentence "ok...so what does this have to do with you?  Need a
 %**********************************************************************
 \chapter{Proposed Solution}
 \label{chap:three}
-This research proposes applying multidimensional software correlation concepts augmented with domain information from the Lockheed Martin Cyber Kill Chain \cite{hutchins2011intelligence}, MITRE ATT\&CK framework \cite{strom2018mitre}, and National Vulnerability Database (NVD) \cite{zhang2011empirical} to authorship attribution.    
+This research proposes measuring the computational efficiency of applying multidimensional software correlation to malware feature sets for authorship attribution.    
 
-We propose applying inputs into a framework made up of the Cyber Kill Chain, MITRE ATT&CK knowledge base, and NVD in order to apply multidimensional software correlation.  These inputs will be in both structured and unstructured form that describe semantic details of malicious software, network path, and other details that describe a cyber threat's actions.  Analysis will be done to these inputs and a level of confidence will be applied or updated based on the information.  Based on that level of confidence, the analysts will better be able to identify unique capabilities and infrastructure within malicious software artifacts and apply better authorship attribution.  Using forensic software analysis to determine the function and motivation between malicious software examples can allow for the syntactic differences in implementations to be discarded, but be able to focus on the program's mapped semantic characteristics to determine origin and a potential future path.
+We propose applying known and attributed malware inputs within a dataset into a framework for analysis in order to measure the computational efficiency of preforming feature selection for the primary use of authorship attribution.  The dataset inputs will be structured in form of Advanced Persistent Threats (APT) that are separated by Country, APT Group, and Malware Family \cite{APTMalware2022}.  
 
-The base of this tiered framework for multidimensional correlation is needed to allow analysis to be applied from multiple inputs across a timeline of events.  The Lockheed Martin Cyber Kill Chain allows analysis to take place at different stages with the natural cycle of a cyber attack without having to start from the beginning.  This is important because of the increased use of separate teams for areas of specialty that support the same mission.  Additionally, the state of digital security is such that most intermediate and advanced cyber threat actors are not found to have compromised a system for an extended period of time from when reconnaissance started.  There are the seven steps of the Cyber Kill Chain that describe the actions of a cyber threat: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control (C2), and Actions on Objectives \cite{martin2014cyber}.
+\begin{table}[h!]
+  \centering
+    \caption{APT Malware Dataset}
+    \label{tab:table1}
+    \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{l|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{Country} & \textbf{APT Group} & \textbf{Family}  & \textbf{Requested} & \textbf{Downloaded}\\
+      \hline
+      China & APT 1 &  & 1007 & 405 \\
+      China & APT 10 & i.a. Plugx & 300 & 244 \\
+      China & APT 19 & Derusbi & 33 & 32 \\
+      China & APT 21 & TravNet & 118 & 106 \\
+      Russia & APT 28 & *Bears* & 230 & 214 \\
+      Russia & APT 29 & *Dukes* & 281 & 281 \\
+      China & APT 30 & & 164 & 164 \\
+      North-Korea & DarkHotel & DarkHotel & 298 & 273 \\
+      Russia & Energetic Bear & Havex & 132 & 132 \\
+      USA & Equation Group & Fannyworm & 395 & 395 \\
+      Pakistan & Gorgon Group & Different RATs & 1085 & 961 \\
+      China & Winnti & & 406 & 387 \\
+      \hline
+      Total & & & 4449 & 3594 \\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+The semantic details of the malicious software samples within this dataset will be used to compare the cyber threats actions in a sandboxed environment.  Analysis will be done to these inputs and a level of accuracy will be applied  based on the result given from the environment.  Based on the accuracy, this research will show the computational efficient feature sets within the classifiers chosen.  This will aid analysts to identify unique capabilities and infrastructure within malicious software artifacts and apply better authorship attribution.  Using forensic software analysis to determine the structure and function between malicious software examples can allow for the syntactic differences in implementations to be discarded, but be able to focus on the program's mapped semantic characteristics to determine the origin.
+
+The base of this research in multidimensional correlation contains three main items.  First is a static and dynamic malware analysis environment designed to identify potential features from the samples contained within the dataset.  Next is a software codebase designed to submit samples and receive results from the analysis environment.  Last is the application of two machine learning classifiers in order to measure the accuracy of attribution applied using this method of analysis.  
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/APTAttribution-codebase.png}
+	\caption{APTAttribution Codebase \protect\cite{APTAttribution2022}}
+	\label{fig:APTAttribution-codebase}
+\end{figure}
+
+\begin{comment}
+needed to allow analysis to be applied from multiple inputs across a timeline of events.  The Lockheed Martin Cyber Kill Chain allows analysis to take place at different stages with the natural cycle of a cyber attack without having to start from the beginning.  This is important because of the increased use of separate teams for areas of specialty that support the same mission.  Additionally, the state of digital security is such that most intermediate and advanced cyber threat actors are not found to have compromised a system for an extended period of time from when reconnaissance started.  There are the seven steps of the Cyber Kill Chain that describe the actions of a cyber threat: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control (C2), and Actions on Objectives \cite{martin2014cyber}.
 
 ``The MITRE ATT&CK knowledge base describes cyber adversary behavior and provides a common taxonomy for both offense and defense. It has become a useful tool across many cyber security disciplines to convey threat intelligence, perform testing through red teaming or adversary emulation, and improve network and system defenses against intrusions"  \cite{strom2018mitre}.   This framework can also be used to assist in the application of providence for the tactics and techniques to be define as adversarial behaviors within a lifecycle to a degree where they can be more effectively mapped to attribution.  The MITRE ATT&CK framework provides a granular view of the Delivery, Exploitation, Installation, C2 , and effects within the Cyber Kill Chain. 
 
 The National Vulnerability Database (NVD) is a synchronized and searchable database of publicly disclosed cybersecurity vulnerabilities and exposures \cite{NIST_NVD:2020}.  The NVD consists of Common Vulnerabilities and Exposures (CVE) entries and is extended to include additional data such as fix information, severity scores, and impact ratings. As part of its enhanced information, NVD also provides advanced searching features such as by OS; by vendor name, product name, and/or version number; and by vulnerability type, severity, related exploit range, and impact.
-
+\end{comment}
 
 \section{Research Goals}
-The primary goal of this research is to increase confidence in applying cyber threat attribution.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports, using the distributional semantics technique of Natural Language Processing (NLP), show a precision rate of 83 percent \cite{noor2019machine}.  We aim to increase the rate of precision for authorship attribution of malicious software samples by applying multidimensional analysis of inputs in order to apply attribution at greater levels of confidence.  A secondary goal of this research is to explore the areas of analyzing current and projecting future complexity of malicious software and linage of authors.  
+The primary goal of this research is to measure the computational efficiency of applying cyber threat attribution.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports, using the distributional semantics technique of Natural Language Processing (NLP), show a precision rate of 83 percent \cite{noor2019machine}.  We aim to measure and identify key feature sets that can also obtain this rate of precision for authorship attribution of malicious software samples with a high computation efficiency.  
 
 \begin{comment}
 DU comment on research goals "I don't know what this says" = 'map semantic data models in order to determine the linage of malicious software.'  Also, what does 'non-standard environments' "mean?"
@@ -352,13 +391,13 @@ What is the major contribution?  What is the CS link to changing the world?
 \end{comment}
 
 \section{Research Idea}
-The novelty of this research is in first, determining the role authorship plays in the similarity factor of software artifacts, and second, projecting the trajectory of behavior based on the providence of artifacts attributed to a specific author.  Black box analysis of a particular software's attributes can be used to map relations between known and unknown cyber threats.  If similar attributes are found from two or more different examples, then their capabilities, infrastructure, and behavior can be used to describe their providence.  The same black box analysis can also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method, when combined inside of a novel threat framework, can apply deeper connections that be can used to increase the confidence level of applying cyber threat attribution.  In other words, the idea of applying augmented intelligence using a novel threat framework can increase the speed and accuracy of applying cyber threat attribution and also more accurately identify and project the trajectory of malware.
+The novelty and utility of this research is lessen the computational work needed to accurately apply cyber threat attribution.  Determining the role authorship plays in the similarity factor of software artifacts based on the providence of artifacts attributed to a specific threat actor.  Black box analysis of a particular software's attributes can be used to map relations between known and unknown cyber threats.  If similar attributes are found from two or more different examples, then their capabilities, infrastructure, and behavior can be used to describe their providence.  The same black box analysis can also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method, when combined inside of a combined static and dynamic analysis environment, can apply deeper connections that be can used to increase the accuracy of applying cyber threat attribution with less resources.  In other words, the idea of applying augmented intelligence by using a novel approach to feature selection can increase the speed of applying cyber threat attribution.
 
 We plan to tailor the research to cyber threat actors with known characteristics by first linking actions and tools that fall within the framework to a signature of mapped attributes in order to determine providence and provide further matches or changes within these characteristics.  This idea is similar to how \cite{oh2009fight} used variable-length fingerprints across a series of instructions to describe how data is used within a function or basic block.  The order and path of data transformations are important and uniquely identifiable, such as in the same way that an mystery author's work can be identified because of key characteristics.  
 
+\begin{comment}
 A focus has been made to standardized formats of Cyber Threat Information (CTI) in order to increase data sharing.  The Malware Information Sharing Platform (MISP) is an open source platform that can be used for gathering, sharing, storing, and correlating a number of structured and unstructured inputs about cyber threats \cite{MISP}.  Examples of common MISP feeds are Indicators of Compromise of targeted attacks, threat intelligence, financial fraud information, and vulnerability information.  We will use the MISP platform for collection and analysis of inputs of authorship attribution based on levels of confidence.  Data from this platform will be used to create training data for an augmented intelligence system that leverages Natural Language Processing.
 
-\begin{comment}
 DU comments on last paraphgraph within 'Research Idea' = "while this is a good 100k-foot descroption, we need a more deailed explanation"
 
 	DU = Change reference display from '[Oh 2009]' to "Oh [2009]"
@@ -367,7 +406,7 @@ DU comments on last paraphgraph within 'Research Idea' = "while this is a good 1
 \end{comment}
 
 \section{Research Hypothesis} 
-The research hypothesis is ``the multidimensional software correlation mapping technique will be more accurate than currently recognized methods in applying cyber threat attribution''. The null hypothesis of this research is ``the multidimensional software correlation mapping technique will preform equal to or worse than currently recognized methods in applying cyber threat attribution''.
+The research hypothesis is ``the multidimensional software correlation mapping technique of feature selection will be more efficient than currently recognized methods in applying cyber threat attribution''. The null hypothesis of this research is ``the multidimensional software correlation mapping technique will be as efficient or less efficient than currently recognized methods in applying cyber threat attribution''.
 
 \begin{comment}
 
@@ -382,8 +421,89 @@ DU "think of a hypothesis as being a metric by which you will know when you are 
 \end{comment}
 
 \section{Validation}
-Data from 13 sources will be ingested into the analytical platform.  These data points were chosen because each of the feeds provide unique information that can be applied to cyber threat attribution.  Below is a table that describes the format and source.  Additionally figure 3.1 shows a an overlap analysis of the unique data found within the 13 feeds.
+3594 samples from 12 different APT will be ingested into the analytical platform.  These samples were chosen because they are from different APTs supporting different countries and contain a variety of unique information that can be used to test the efficiency of applying cyber threat attribution.  
 
+Below is a table that describes the control results from the application of the Random Forrest Classifier (RFC) and Deep Neural Network (DNN) Classifier.  This control results are used to describe that accuracy of applying attribution using extracted and filtered results available from the malware analysis environment.  This environment includes the ability to provide identifying features from static/dynamic software analysis, volatile memory, and network actions.  These features are used with the classifiers to apply attribution across the twelve identified Advanced Persistent Threats identified in table 1.  Within the Dataset column, ``*" designates the extracted results from the environment.  Multiple controls runs were executed and results were within 2.5\% across all runs.
+
+\begin{table}[h!]
+    \centering
+        \caption{Control Results}
+        \label{tab:table2}
+        \begin{width=\textwidth}
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{APTGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.95 ($\sigma$: 0.01) & 0.82 ($\sigma$: 0.03) & 0.95 ($\sigma$: 0.01) \\
+                     & Cuckoo* & 0.40 ($\sigma$: 0.01) & 0.17 ($\sigma$: 0.03) & 0.22 ($\sigma$: 0.02) \\
+            \multirow{DNN} & Cuckoo & 0.94 ($\sigma$: 0.00) & 0.81 ($\sigma$: 0.02) & 0.95 ($\sigma$: 0.01) \\
+                     & Cuckoo* & 0.40 ($\sigma$: 0.01) & 0.13 ($\sigma$: 0.07) & 0.21 ($\sigma$: 0.03) \\
+        \end{tabular}
+
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{CountryGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.96 ($\sigma$: 0.01) & 0.92 ($\sigma$: 0.00) & 0.96 ($\sigma$: 0.00) \\
+                     & Cuckoo* & 0.44 ($\sigma$: 0.01) & 0.28 ($\sigma$: 0.01) & 0.28 ($\sigma$: 0.01) \\
+            \multirow{DNN} & Cuckoo & 0.97 ($\sigma$: 0.00) & 0.92 ($\sigma$: 0.01) & 0.96 ($\sigma$: 0.00) \\
+                     & Cuckoo* & 0.44 ($\sigma$: 0.00) & 0.27 ($\sigma$: 0.01) & 0.28 ($\sigma$: 0.01) \\
+        \end{tabular}
+
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{CountrySeparatedGroupAndFamiliesGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.52 ($\sigma$: 0.01) & 0.58 ($\sigma$: 0.11) & 0.58 ($\sigma$: 0.05) \\
+                     & Cuckoo* & 0.67 ($\sigma$: 0.01) & 0.35 ($\sigma$: 0.01) & 0.34 ($\sigma$: 0.01) \\
+            \multirow{DNN} & Cuckoo & 0.71 ($\sigma$: 0.04) & 0.67 ($\sigma$: 0.04) & 0.63 ($\sigma$: 0.07) \\
+                     & Cuckoo* & 0.67 ($\sigma$: 0.01) & 0.34 ($\sigma$: 0.02) & 0.33 ($\sigma$: 0.01) \\
+        \end{tabular}
+    \end{center}
+\end{table}
+
+In review of the top scoring samples that were rated between 7-10, with 10 being the highest, there were 17 sample reports that fell into this range.  There were seven distinguishing features that these samples had within categories of API, arguments, pe sections, entropy, and file details.  In total, there were 167 API calls execute by the 17 samples that were captured.  There were 17 instances of the API WriteProcessMemory.  Data pruning was executed to isolate on the API WriteProcessMemory calls and associated arguments from the next round of classification.  The next table describes the pruned analysis results that show the rate of change in attribution based on two changes to the extracted results from the analysis environment.  As you can see the accuracy calculations in red have a rate of accuracy in the extracted fields that shows the efficiency of applying attribution using only this combination of extracted data input.  
+
+
+\begin{table}[h!]
+    \centering
+        \caption{API WriteProcessMemory Extracted Results}
+        \label{tab:table2}
+        \begin{width=\textwidth}
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{APTGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.95 ($\sigma$: 0.01) & 0.83 ($\sigma$: 0.01) & 0.95 ($\sigma$: 0.01) \\
+                     & Cuckoo* & \color{red}{0.28} ($\sigma$: 0.01) & \color{red}{0.16} ($\sigma$: 0.09) & \color{red}{0.05} ($\sigma$: 0.01) \\
+            \multirow{DNN} & Cuckoo & 0.95 ($\sigma$: 0.01) & 0.78 ($\sigma$: 0.02) & 0.95 ($\sigma$: 0.00) \\
+                     & Cuckoo* & \color{red}{0.27} ($\sigma$: 0.00) & \color{red}{0.07} ($\sigma$: 0.00) & \color{red}{0.08} ($\sigma$: 0.03) \\
+        \end{tabular}
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{CountryGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.96 ($\sigma$: 0.01) & 0.93 ($\sigma$: 0.00) & 0.96 ($\sigma$: 0.01) \\
+                     & Cuckoo* & \color{red}{0.38} ($\sigma$: 0.00) & \color{red}{0.17} ($\sigma$: 0.06) & \color{red}{0.15} ($\sigma$: 0.03) \\
+            \multirow{DNN} & Cuckoo & 0.96 ($\sigma$: 0.01) & 0.93 ($\sigma$: 0.01) & 0.96 ($\sigma$: 0.00) \\
+                     & Cuckoo* & \color{red}{0.37} ($\sigma$: 0.00) & \color{red}{0.21} ($\sigma$: 0.10) & \color{red}{0.17} ($\sigma$: 0.03) \\
+        \end{tabular}
+
+
+        \begin{tabular}{l|l|r|r|r}
+            \multicolumn{5}{l}{CountrySeparatedGroupAndFamiliesGrouper} \\
+                     & \textbf{Dataset} & \textbf{Unbalanced} & \textbf{Undersampling} & \textbf{Oversampling} \\ \hline
+            \multirow{RFC} & Cuckoo & 0.53 ($\sigma$: 0.01) & 0.51 ($\sigma$: 0.02) & 0.56 ($\sigma$: 0.01) \\
+                     & Cuckoo* & 0.70 ($\sigma$: 0.00) & 0.30 ($\sigma$: 0.00) & 0.30 ($\sigma$: 0.00) \\
+            \multirow{DNN} & Cuckoo & 0.71 ($\sigma$: 0.04) & 0.65 ($\sigma$: 0.06) & 0.68 ($\sigma$: 0.07) \\
+                     & Cuckoo* & 0.70 ($\sigma$: 0.00) & 0.38 ($\sigma$: 0.16) & 0.46 ($\sigma$: 0.19) \\
+        \end{tabular}
+    \end{center}
+\end{table}
+
+The extracted accuracy results show a significant change in the both classifiers executed for the APTGrouper and CountryGrouper runs for the results associated with the WriteProcessMemory API of the top scoring results from the analysis environment.  Specifically, the average rate of change between the positive accuracy of the Control and API WriteProcessMemory Extracted Results with both classifiers are within 8-11\% for the highlighted Groupers.  Measurements within these results of accuracy between the control and pruned results will be the validation mechanism for this research.
+
+\begin{comment}
 \begin{table}[]
 \begin{tabular}{lll}
 Format   & Provider       & URL                                                                  \\
@@ -414,7 +534,7 @@ The novel framework described earlier in the paper based upon a tiered foundatio
 
 From this framework, training data will be exported to a augmented intelligence platform designed for NLP and training will take place to enable authorship attribution.
 
-\begin{comment}
+
 
 \subsection{Validation Outline}
 
@@ -435,8 +555,8 @@ From this framework, training data will be exported to a augmented intelligence 
     \2 Apply Cyber Threat Attribution
 \1 setup system to compare results 
 \end{outline}
-\end{comment}
-\begin{comment}
+
+
 DU commnet on 'malicous software samples' =
 		"specifics needed: where will they come from (if known)?"
 		"how many samples will you need?"
@@ -468,7 +588,7 @@ For the validation suite of this research a description of what properties that 
 
 These methods will be tested by applying open-source projects on a sample of hardware platforms, to be determined later, where source and compiled code can be obtained to verify semantic changes as well as to allow for refactoring of the mapping process in order to test all these differencing techniques' ability to apply attribution and gauge future capabilities.
 
-\end{comment}
+
 
 \section{Schedule}
 % http://texdoc.net/texmf-dist/doc/latex/pgfgantt/pgfgantt.pdf
@@ -543,7 +663,7 @@ Below is the schedule for research and validation in the form of a gantt chart.
 \ganttlink[link type=s-s]{WBS1B}{WBS1C}
 \ganttlink[link type=f-s]{WBS1C}{WBS1D}
 \end{ganttchart}
-
+\end{comment}
 
 %**************************************************************************
 %**************************************************************************
