@@ -37,7 +37,7 @@
 \newtheorem{theorem}{Theorem}[chapter]
 
 % Put the title, author, and date in. 
-\title{Computational Efficiency of Software Forensics for Adversarial Authorship}
+\title{Software Forensics for Adversarial Authorship}
 \author{Rodney Visser} 
 \date{[Insert date of graduation, e.g., Aug 1, 2022]} %date of graduation
 \copyrightyear{2022} %copyright year
@@ -329,7 +329,12 @@ DU comments onlast sentence "ok...so what does this have to do with you?  Need a
 %**********************************************************************
 \chapter{Proposed Solution}
 \label{chap:three}
-This research proposes a novel method of identify the features within larger feature set that provide the best computationally feasible solution to authorship attribution.  We propose applying known and attributed malware inputs into a framework for analysis in order to identify the best computational efficiency of preforming feature selection for the purpose of authorship attribution.  
+%This research proposes a novel method of identify the features within larger feature set that provide the best %computationally feasible solution to authorship attribution.  We propose applying known and attributed malware inputs into a %framework for analysis in order to identify the best computational efficiency of preforming feature selection for the %purpose of authorship attribution.  
+
+This research proposes a novel approach to malware authorship attribution by identifying those features within a larger feature set of malicious software samples in such a way as to maximize accuracy.  Specifically, we will input a given attributed malware dataset into an existing framework that performs static and dynamic malware analysis.   The results of the analysis are applied to machine learning classifiers that result in all possible feature sets.  We propose to determine the smallest subset of features that maximize accuracy.  
+
+
+\begin{comment}
 
 The feature sets within malicious software samples will be used to compare the cyber threats actions in a sandboxed environment.  Analysis using Natural Language Processing (NLP) algorithms on key features within feature set families for authorship attribution will be preformed in order find the accuracy of the classifiers.  Based on the accuracy, this research will show the computational efficient feature sets chosen.  This will help analysts identify similar and unique features within malicious software artifacts in order to better apply authorship attribution to currently unattributed samples or threat actors.  Using forensic software analysis to determine the structure and function among malicious software examples can allow for the syntactic differences in implementations to be ignored, but be able to focus on the program's attributable characteristics within feature sets to determine the origin.  Current methods in applying cyber threat attribution will be researched in order to provide a comparison on accuracy.
 
@@ -350,8 +355,13 @@ needed to allow analysis to be applied from multiple inputs across a timeline of
 The National Vulnerability Database (NVD) is a synchronized and searchable database of publicly disclosed cybersecurity vulnerabilities and exposures \cite{NIST_NVD:2020}.  The NVD consists of Common Vulnerabilities and Exposures (CVE) entries and is extended to include additional data such as fix information, severity scores, and impact ratings. As part of its enhanced information, NVD also provides advanced searching features such as by OS; by vendor name, product name, and/or version number; and by vulnerability type, severity, related exploit range, and impact.
 \end{comment}
 
+\end{comment}
+
 \section{Research Goals}
-The primary goal of this research is to identify the minimum number of features that are required to maximize attribution and minimize computation.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports using the distributional semantics technique of Natural Language Processing (NLP) show a precision rate of 83 percent \cite{noor2019machine}.  We aim to identify the computation efficient features in applying the accuracy of authorship attribution for malicious software samples.  
+\begin{comment}
+The primary goal of this research is to identify the minimum number of features that are required to maximize attribution and minimize computation.  Current capabilities within the area of identification of cyber threat actors (CTAs) based on their attack patterns extracted from cyber threat intelligence (CTI) reports using the distributional semantics technique of Natural Language Processing (NLP) show a precision rate of 83 percent \cite{noor2019machine}.  We aim to identify the computation efficient features in applying the accuracy of authorship attribution for malicious software samples. 
+\end{comment}
+The overarching goal of this research is to identify the minimum number of features required to attribute a malware sample to its author.  The objectives are 1) to reduce the noise inherent with a large feature set, 2) to increase accuracy, and 3) to reduce the computation resources required to perform authorship attribution.
 
 \begin{comment}
 DU comment on research goals "I don't know what this says" = 'map semantic data models in order to determine the linage of malicious software.'  Also, what does 'non-standard environments' "mean?"
@@ -362,8 +372,21 @@ What is the major contribution?  What is the CS link to changing the world?
 20200722 - Pulled from first sentence of Research Goals "based on validated cyber threat intelligence and leverage the combined frameworks to enable forensic software analysis"
 \end{comment}
 
-\section{Research Idea}
-The novelty and utility of this research is to lessen the computational work needed to accurately apply cyber threat attribution.  Determining the role authorship plays in the similarity factor of software artifacts based on the providence of artifacts attributed to a specific threat actor enables analysis to react better when new threats emerge or change tactics.  In 2020, HP released a quarterly report on cyber threats that found "29\% of malware captured was previously unknown – due to the widespread use of packers and obfuscation techniques by attackers seeking to evade detection.  It took 8.8 days, on average, for threats to become known by hash to antivirus engines – giving hackers over a week’s ‘head-start’ to further their campaigns." \cite{HP-Bromium2020Q4report}  Research in applying computationally efficient attribution based on a particular software's attributes can be leveraged to react quicker to unknown threats.  If similar attributes are found in two or more different examples, then feature extraction can be used to describe their providence.  Computationally efficient feature extraction can also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method for feature extraction is to increase the accuracy of applying cyber threat attribution with fewer resources.  In other words, the idea of applying augmented intelligence by using a novel approach to feature selection can increase the speed of applying cyber threat attribution.  The dataset inputs will be structured in form of Advanced Persistent Threats (APT) that are separated by Country, APT Group, and Malware Family \cite{APTMalware2022}.  Table 3.1 gives a detailed overview of the contents of the APT Malware dataset used in this research.  It provides information on the raw malware samples collected from twelve identified Advanced Persistent Threats, their country of origin, malware family, and number of samples downloaded into the dataset.  
+\section{Research Plan}
+\begin{comment} Look at integration into Ch.2...also need to reference Cuckoo sandbox
+The novelty and utility of this research is to lessen the computational work needed to accurately apply cyber threat attribution.  Determining the role authorship plays in the similarity factor of software artifacts based on the providence of artifacts attributed to a specific threat actor enables analysis to react better when new threats emerge or change tactics.  In 2020, HP released a quarterly report on cyber threats that found "29\% of malware captured was previously unknown – due to the widespread use of packers and obfuscation techniques by attackers seeking to evade detection.  It took 8.8 days, on average, for threats to become known by hash to antivirus engines – giving hackers over a week’s ‘head-start’ to further their campaigns." \cite{HP-Bromium2020Q4report}  Research in applying computationally efficient attribution based on a particular software's attributes can be leveraged to react quicker to unknown threats.  If similar attributes are found in two or more different examples, then feature extraction can be used to describe their providence.  Computationally efficient feature extraction can also be applied over a large pool of malicious software examples in order to find trends in currently known capabilities and future focus areas.  The strength of this method for feature extraction is to increase the accuracy of applying cyber threat attribution with fewer resources.  In other words, the idea of applying augmented intelligence by using a novel approach to feature selection can increase the speed of applying cyber threat attribution.  
+\end{comment}
+
+\begin{comment}This research plan includes four parts: a dataset used an input, automated analysis platform, reporting infrastructure, and feature selection.  The dataset inputs will be structured in form of Advanced Persistent Threats (APT) that are separated by Country, APT Group, and Malware Family \cite{APTMalware2022}.  Table 3.1 gives a detailed overview of the contents of the APT Malware dataset used in this research.  It provides information on the raw malware samples collected from twelve identified Advanced Persistent Threats, their country of origin, malware family, and number of samples downloaded into the dataset.  
+\end{comment}
+
+We plan to conduct this research by first extracting features from a repository of malware samples that are attributed and  in common use by the cybersecurity research community, then selecting those features that provide the greatest accuracy for the least computational cost. 
+
+\subsection{Feature Extraction}
+
+The feature extraction phase consists of selecting the attributed malware dataset, profiling each artifact in the dataset through static and dynamic analysis, identifying indicators of malicious action.     
+
+Our background research uncovered three malware datasets that contained samples that are attributed to a specific author:   Laurenza \cite{laurenza2019daptaset}, cyber-research \cite{APTMalware2022}, Haddadpajouh \cite{haddadpajouh2020mvfcc}.   The Laurenza dataset consists of 19 APT groups and over 2000 malware samples.  The cyber-research dataset contains 3594 malware samples which are related to twelve APT groups and five different nation-states.  The Haddadpajouh dataset is a subset of the cyber-research dataset that focuses on five APT groups: APT1, APT3, APT28, APT33, and APT37.  Cyber-research is the richest of the datasets as it contains 3594 raw malware samples collected from twelve identified Advanced Persistent Threats, the country of origin, and malware family.  Table 3.1 overviews the name3 data with the number of malware samples attributed to APT Groups within respective countries. 
 
 \begin{table}[h!]
   \centering
@@ -371,7 +394,7 @@ The novelty and utility of this research is to lessen the computational work nee
     \label{tab:table1}
     \begin{adjustbox}{width=\textwidth}
     \begin{tabular}{l|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-      \textbf{Country} & \textbf{APT Group} & \textbf{Family}  & \textbf{Requested} & \textbf{Downloaded}\\
+      \textbf{Country} & \textbf{APT Group} & \textbf{Family}  & \textbf{VOID} & \textbf{Sample Size}\\
       \hline
       China & APT 1 &  & 1007 & 405 \\
       China & APT 10 & i.a. Plugx & 300 & 244 \\
@@ -391,7 +414,40 @@ The novelty and utility of this research is to lessen the computational work nee
   \end{center}
 \end{table}
 
-We plan to tailor the research to cyber threat actors with known characteristics by first analyzing the most frequent features extracted from the highest scoring malicious sample reports.  From there we will measure the accuracy of applying attribution from only using these extracted features.  Once accuracy is measured, the most efficient combination of features to apply attribution will be found using this framework.  In other words, the most frequent features will be extracted from the most malicious sample reports and accuracy will be measured from this starting point.  From this point going forward different combinations of feature sets will be used to identify an efficient solution to applying cyber threat attribution.  This idea is similar to how \cite{oh2009fight} used variable-length fingerprints across a series of instructions to describe how data is used within a function or basic block.  The order and path of data transformations are important and uniquely identifiable, such as in the same way that an mystery author's work can be identified because of key characteristics.  Key characteristics in analyzing the most frequent features extracted from the highest scoring malicious samples are: APIs called, arguments given, PE section details, entropy measurement, and file details.
+In researching malware analysis tools available that could be used to support the effort of preforming feature extraction of malicious samples, three products were investigated (Cuckoo, Remnux, and Bro).   Cuckoo sandbox is a open source platform that automates malicious file analysis for Windows, OS X, Linux and Android binaries.  Remnux is a Linux toolkit that assists in an analysts ability to reverse engineer malware samples.   Bro is a network-based analysis framework.  Cuckoo turned out to be the best fit for this research because it provides a range of analysis capabilites, has an API that can be interfaced with for automation, and open source.  
+
+The software code base that controls the Cuckoo sandbox interacts in the following ways.  First, it manages the starting, stopping, and resetting the virtual machine image where the malware is run in.  Second, it executes the malware samples.  Third, it collects a variety of information from the sandbox, such as: strings, PE sections, identification of packers, shell code, API calls, DLLs accessed, images of UI interaction, network connections, file manipulation, reg keys, and running processes.  Last, the analysis data is captured in JSON formatted files.  Figure 3.1 provides a graphic description of the dataset, software code base, and results. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/APTAttribution-codebase.png}
+	\caption{APTAttribution Codebase \protect\cite{APTAttribution2022}}
+	\label{fig:APTAttribution-codebase}
+\end{figure}
+
+In order to prepare the results to be analyzed cleansing needs to be executed on the raw JSON report files for each samples.  The cleansing consists of two steps.  1) removing encrypted data that is specific to the malware instance but not generally useful to characterizing the malware sample.  2) extracting API calls and arguments.  From this result, the research can be executed in order to analyze the accuracy of applying threat attribution from these cleansed reports.
+
+\subsection{Feature Pruning}
+
+The feature pruning phase allows testing to be done in order to find the most meaningful combinations of features extracted for attribution.  The first part of this phase is to apply two different data modeling classification algorithms to all filtered and extracted results.  In a comparison of data modeling techniques used in the research of applying attribution to threats the Random Forrest and Deep Neural Network Algorithms excelled \cite{gray2021identifying}.  Within the exploration of more than two classification algorithms, Random Forest (RF) was found to be the most suitable candidates for solving the problem due to their enhanced performance against the other techniques they tested  \cite{hong2018classifying}.  These results agree with additional research in the field: \cite{hendrikse2017effect}, \cite{caliskan2015coding}, \cite{kalgutkar2018android}, \cite{meng2016fine}, \cite{gonzalez2018authorship}.  Within the exploration other data modeling techniques, Deep Neural Network's showed usefulness for classifying binaries to authors better than Support Vector Machine (SVM) and Conditional Random Fields (CRFs): \cite{meng2018binary}, \cite{rosenberg2017deepapt}, \cite{rosenberg2018end}, \cite{alrabaee2019feasibility}, \cite{alrabaee2019bineye}.
+
+Results were collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.
+
+
+
+\begin{comment}
+The automated analysis platform used the open source malware analysis sandbox Cuckoo.  All 3594 samples were analyzed in this platform to enable feature set extraction of network, software, user, and other data inputs.  Samples were submitted and reports were returned to the reporting infrastructure though the use of cuckoo REST API.  The average run time for the submission, execution, and collection of the raw reports was around 200 hours.  
+
+The reporting infrastructure is where the raw json formatted reports are housed.  These raw reports are formatted in two different ways in order to preform feature selection that can aid in authorship attribution.  First, the data is filtered in order to remove memory buffer information that does not aid authorship attribution and give the reports a consistent max depth.  Information related to the use of a packer and what level of entropy is present is collected before the memory buffer information is filtered.  Second, API calls and their arguments are extracted in order to provide feature set groupings between reported samples.
+
+With the reports prepared we now analyze the results using two different classifiers with all available features present.  This includes all filtered and extracted data from the raw samples reports.  Results were collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.
+
+In the validation section we describe the process of comparing accuracy from all features to pruned features.  Samples with the combination of most frequent features extracted from the highest scoring malicious sample reports will be used in the initial validation process.  From there we will measure the accuracy of applying attribution from only using these extracted features.  Once accuracy is measured, the most efficient combination of features to apply attribution will be found using this framework.  In other words, the most frequent features will be extracted from the most malicious sample reports and accuracy will be measured from this starting point.  From this point going forward different combinations of feature sets will be used to identify an efficient solution to applying cyber threat attribution.  
+\end{comment}
+
+\begin{comment} look for a different reference that uses the same dataset...maybe https://www.hindawi.com/journals/scn/2021/8077220/#conclusions, references (Random Forests (RF) [50], [22], [54], [44] or Deep/Artificial Neural Networks (DNN/ANN) [103], [104], [78], [7], [8]) in https://arxiv.org/abs/2101.06124, or https://cs.ru.nl/~aserban/theses/b_coen_boot.pdf, and http://www.cs.ru.nl/E.Poll/papers/MalwareStateAttribution2019.pdf
+This idea is similar to how \cite{oh2009fight} used variable-length fingerprints across a series of instructions to describe how data is used within a function or basic block.  The order and path of data transformations are important and uniquely identifiable, such as in the same way that an mystery author's work can be identified because of key characteristics.  Key characteristics in analyzing the most frequent features extracted from the highest scoring malicious samples are: APIs called, arguments given, PE section details, entropy measurement, and file details.
+\end{comment}
 
 \begin{comment}
 A focus has been made to standardized formats of Cyber Threat Information (CTI) in order to increase data sharing.  The Malware Information Sharing Platform (MISP) is an open source platform that can be used for gathering, sharing, storing, and correlating a number of structured and unstructured inputs about cyber threats \cite{MISP}.  Examples of common MISP feeds are Indicators of Compromise of targeted attacks, threat intelligence, financial fraud information, and vulnerability information.  We will use the MISP platform for collection and analysis of inputs of authorship attribution based on levels of confidence.  Data from this platform will be used to create training data for an augmented intelligence system that leverages Natural Language Processing.
