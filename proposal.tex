@@ -384,56 +384,72 @@ We plan to conduct this research by first extracting features from a repository 
 
 \subsection{Feature Extraction}
 
-The feature extraction phase consists of selecting the attributed malware dataset, profiling each artifact in the dataset through static and dynamic analysis, identifying indicators of malicious action.     
+The feature extraction phase consists of selecting the attributed malware dataset, profiling each artifact in the dataset through static and dynamic analysis, and identifying indicators of malicious action.     
 
-Our background research uncovered three malware datasets that contained samples that are attributed to a specific author:   Laurenza \cite{laurenza2019daptaset}, cyber-research \cite{APTMalware2022}, Haddadpajouh \cite{haddadpajouh2020mvfcc}.   The Laurenza dataset consists of 19 APT groups and over 2000 malware samples.  The cyber-research dataset contains 3594 malware samples which are related to twelve APT groups and five different nation-states.  The Haddadpajouh dataset is a subset of the cyber-research dataset that focuses on five APT groups: APT1, APT3, APT28, APT33, and APT37.  Cyber-research is the richest of the datasets as it contains 3594 raw malware samples collected from twelve identified Advanced Persistent Threats, the country of origin, and malware family.  Table 3.1 overviews the name3 data with the number of malware samples attributed to APT Groups within respective countries. 
+Our background research uncovered three malware datasets that contain samples attributed to a specific author:   Laurenza \cite{laurenza2019daptaset}, cyber-research \cite{APTMalware2022}, and Haddadpajouh \cite{haddadpajouh2020mvfcc}.   The Laurenza dataset consists of 19 APT groups and over 2000 malware samples.  The cyber-research dataset contains 3594 malware samples which are related to twelve APT groups and five different nation-states.  The Haddadpajouh dataset consists of roughly 2000 samples and overlaps the cyber-research dataset.  We propose using the cyber-research dataset as it contains the largest number of attributed samples.    Table 3.1 overviews the cyber-research data with the number of malware samples attributed to APT Groups within respective countries. 
 
 \begin{table}[h!]
   \centering
     \caption{APT Malware Dataset}
     \label{tab:table1}
     \begin{adjustbox}{width=\textwidth}
-    \begin{tabular}{l|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-      \textbf{Country} & \textbf{APT Group} & \textbf{Family}  & \textbf{VOID} & \textbf{Sample Size}\\
+    \begin{tabular}{l|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{Country} & \textbf{APT Group} & \textbf{Family} & \textbf{Sample Size}\\
       \hline
-      China & APT 1 &  & 1007 & 405 \\
-      China & APT 10 & i.a. Plugx & 300 & 244 \\
-      China & APT 19 & Derusbi & 33 & 32 \\
-      China & APT 21 & TravNet & 118 & 106 \\
-      Russia & APT 28 & *Bears* & 230 & 214 \\
-      Russia & APT 29 & *Dukes* & 281 & 281 \\
-      China & APT 30 & & 164 & 164 \\
-      North-Korea & DarkHotel & DarkHotel & 298 & 273 \\
-      Russia & Energetic Bear & Havex & 132 & 132 \\
-      USA & Equation Group & Fannyworm & 395 & 395 \\
-      Pakistan & Gorgon Group & Different RATs & 1085 & 961 \\
-      China & Winnti & & 406 & 387 \\
+      China & APT 1 &  & 405 \\
+      China & APT 10 & i.a. Plugx & 244 \\
+      China & APT 19 & Derusbi & 32 \\
+      China & APT 21 & TravNet & 106 \\
+      Russia & APT 28 & *Bears* & 214 \\
+      Russia & APT 29 & *Dukes* & 281 \\
+      China & APT 30 & & 164 \\
+      North-Korea & DarkHotel & DarkHotel & 273 \\
+      Russia & Energetic Bear & Havex & 132 \\
+      USA & Equation Group & Fannyworm & 395 \\
+      Pakistan & Gorgon Group & Different RATs & 961 \\
+      China & Winnti & & 387 \\
       \hline
-      Total & & & 4449 & 3594 \\
+      Total & & & 3594 \\
     \end{tabular}
   \end{center}
 \end{table}
 
-In researching malware analysis tools available that could be used to support the effort of preforming feature extraction of malicious samples, three products were investigated (Cuckoo, Remnux, and Bro).   Cuckoo sandbox is a open source platform that automates malicious file analysis for Windows, OS X, Linux and Android binaries.  Remnux is a Linux toolkit that assists in an analysts ability to reverse engineer malware samples.   Bro is a network-based analysis framework.  Cuckoo turned out to be the best fit for this research because it provides a range of analysis capabilites, has an API that can be interfaced with for automation, and open source.  
+In researching malware analysis tools available that could be used to support the effort of preforming feature extraction of malicious samples, three products were investigated (Cuckoo ref needed, Remnux ref needed, and Bro ref needed).   Cuckoo  is a open source platform that automates malicious file analysis for Windows, OS X, Linux, and Android binaries.  Remnux is a Linux toolkit that assists analysts in reverse engineering malware samples.   Bro is a network-based analysis framework.  We propose using Cuckoo because it encompasses many of Remnux' and Bro's features, has an API that can be interfaced with for automation, and is open source.  
 
-The software code base that controls the Cuckoo sandbox interacts in the following ways.  First, it manages the starting, stopping, and resetting the virtual machine image where the malware is run in.  Second, it executes the malware samples.  Third, it collects a variety of information from the sandbox, such as: strings, PE sections, identification of packers, shell code, API calls, DLLs accessed, images of UI interaction, network connections, file manipulation, reg keys, and running processes.  Last, the analysis data is captured in JSON formatted files.  Figure 3.1 provides a graphic description of the dataset, software code base, and results. 
+The software code base that controls the Cuckoo sandbox interacts in the following ways:  First, it manages the virtual machine image in which the malware is run.  Second, it executes each malware sample in the sandboxed virtual machine environment.  Third, it collects a variety of information from the sandbox, such as strings, PE sections, identification of packers, shell code, API calls, DLLs accessed, images of UI interaction, network connections, file manipulation, registry hives, and running processes.  Fourth, the analysis data is captured in JSON-formatted files.  Figure 3.1 provides a graphic description of the workflow as the dataset is ingested by the software code base to produce the reports. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\textwidth]{images/APTAttribution-codebase.png}
-	\caption{APTAttribution Codebase \protect\cite{APTAttribution2022}}
+	\includegraphics[width=1\textwidth]{images/APTAttribution-codebase-flow.png}
+	\caption{Feature extraction workflow  \protect\cite{APTAttribution2022}}
 	\label{fig:APTAttribution-codebase}
 \end{figure}
 
-In order to prepare the results to be analyzed cleansing needs to be executed on the raw JSON report files for each samples.  The cleansing consists of two steps.  1) removing encrypted data that is specific to the malware instance but not generally useful to characterizing the malware sample.  2) extracting API calls and arguments.  From this result, the research can be executed in order to analyze the accuracy of applying threat attribution from these cleansed reports.
+In order to prepare the results to be analyzed, cleansing needs to be executed on the raw JSON report files for each sample.  The cleansing consists of two steps:  1) removing encrypted data that is specific to the malware instance but not generally useful to characterizing the malware sample and 2) extracting API calls and arguments.  Following the cleansing process, the reports are ready for feature pruning.  
 
 \subsection{Feature Pruning}
 
-The feature pruning phase allows testing to be done in order to find the most meaningful combinations of features extracted for attribution.  The first part of this phase is to apply two different data modeling classification algorithms to all filtered and extracted results.  In a comparison of data modeling techniques used in the research of applying attribution to threats the Random Forrest and Deep Neural Network Algorithms excelled \cite{gray2021identifying}.  Within the exploration of more than two classification algorithms, Random Forest (RF) was found to be the most suitable candidates for solving the problem due to their enhanced performance against the other techniques they tested  \cite{hong2018classifying}.  These results agree with additional research in the field: \cite{hendrikse2017effect}, \cite{caliskan2015coding}, \cite{kalgutkar2018android}, \cite{meng2016fine}, \cite{gonzalez2018authorship}.  Within the exploration other data modeling techniques, Deep Neural Network's showed usefulness for classifying binaries to authors better than Support Vector Machine (SVM) and Conditional Random Fields (CRFs): \cite{meng2018binary}, \cite{rosenberg2017deepapt}, \cite{rosenberg2018end}, \cite{alrabaee2019feasibility}, \cite{alrabaee2019bineye}.
+The feature pruning phase sets the stage for identifying the most meaningful combinations of features required for attribution.  This research includes the identification and use of data modeling classification algorithms on the results.  The reason for the use of data modeling classification is to support a structured method for validating the results and promote future analysis by adding additional inputs into this modular framework.  In a comparison of data modeling techniques used in the research of applying attribution to threats the Random Forrest and Deep Neural Network Algorithms excelled \cite{gray2021identifying}.  Within the exploration of more than two classification algorithms, Random Forest (RF) was found to be the most suitable candidates for solving the problem due to their enhanced performance against the other techniques they tested  \cite{hong2018classifying}.  These results agree with additional research in the field: \cite{hendrikse2017effect}, \cite{caliskan2015coding}, \cite{kalgutkar2018android}, \cite{meng2016fine}, \cite{gonzalez2018authorship}.  The parameter values chosen for this data modeling classification algorithm is 100 estimators, meaning that 100 decision trees will run for this model.  Within the exploration other data modeling techniques, Deep Neural Network's showed usefulness for classifying binaries to authors better than Support Vector Machine (SVM) and Conditional Random Fields (CRFs): \cite{meng2018binary}, \cite{rosenberg2017deepapt}, \cite{rosenberg2018end}, \cite{alrabaee2019feasibility}, \cite{alrabaee2019bineye}.  The parameters values chosen for this data modeling classification algorithm is 7 layers of that range from 2000 to 500 nodes, that have a max of 250 iterations through which the data will be run.  These two data modeling classification algorithms show promise in assisting in this research.  Additionally, using more than one data modeling classification algorithm helps to fight bias present in either or the algorithms used.
 
-Results were collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/JSON_Structure.png}
+	\caption{JSON Structure}
+	\label{fig:JSON Structure}
+\end{figure}
 
+Once the data modeling classification algorithms are selected they will be executed against all filtered and extracted results.  These results are collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.  This method of data pruning is done though jq scripts on the .json formatted results.  An example of this pruning would be iterate over all json formatted results file to separate the data for the WriteProcessMemory API using this piped query string: .behavior.processes[].calls[] | select(.api == "WriteProcessMemory").api.  The ontology of these results is structured into 13 areas described in Figure 3.2.  
 
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/13_features_reports-vs-data.png}
+	\caption{Features}
+	\label{fig:Features}
+\end{figure}
+
+The info feature contains information on the time/date that the sample submitted, executed, and reported on.  Also, it provides details on Virtual Machine that sample was run on.  Signatures provides a connection between sample execution activities to potential indicators of compromise (IoC).  The target group of features gives target file details, like: name, hash, path, size, and crc checks.  The collection of network information that emanated from the execution of the sample can be viewed in the network feature.  Procmemory shows the details about different regions of the memory with their size, protection level, start and end addresses.  The static feature displays information of the binary and its parts.  Timestamp of when compiled, type of binary, resources used, language, PE sections, PE sections types, memory addresses, and level of entropy.  Dropped provides information on dropped files, hashes, pids, and yara IoC rules flagged.  The behavior collects information on processes, parent/child processes, APIs, and their actions.  Information on size, path, hash, network of items of interest in the memory buffer is contained within the buffer feature.  Debug is where raw logs from sample execution is stored.  Information about the user interface at different points during sample run can be referenced in the screenshot feature.  Strings contains extracted string from the sample.  Metadata includes information about various outputs from the sample being executed.  The scope of these json results include more than 38 million items, 1.35 million being unique, and an upper bound of 2.2 million instances.  The frequency of the total amount of reports and data point present in these thirteen different feature is displayed in Figure 3.3.
+
+Iterations of analysis based on different combinations of features will be used to find the most effective way to apply attribution.  Confusion matrices generated from the data classification algorithms will be used to compare accuracy and drive the iteration process of identifying features that have the greatest rate of positive change for attribution accuracy.  The Validation Section 3.4 describes a specific scenario of feature pruning, analysis, and results.
 
 \begin{comment}
 The automated analysis platform used the open source malware analysis sandbox Cuckoo.  All 3594 samples were analyzed in this platform to enable feature set extraction of network, software, user, and other data inputs.  Samples were submitted and reports were returned to the reporting infrastructure though the use of cuckoo REST API.  The average run time for the submission, execution, and collection of the raw reports was around 200 hours.  
