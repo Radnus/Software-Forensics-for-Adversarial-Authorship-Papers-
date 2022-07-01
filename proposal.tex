@@ -21,6 +21,8 @@
 \usepackage{adjustbox}
 \usepackage{outlines}
 \usepackage[table]{xcolor}
+\usepackage{algorithm} 
+\usepackage{algpseudocode}
 %\usepackage{natbib}
 %%%%%Format rules: Normal margins are 1 in. If you need to print with 1.5in margins, uncomment the line below
 %\oddsidemargin0.5in \textwidth6in
@@ -433,12 +435,12 @@ The feature pruning phase sets the stage for identifying the most meaningful com
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\textwidth]{images/JSON_Structure.png}
+	\includegraphics[width=1\textwidth]{images/JSON_Structure2.png}
 	\caption{JSON Structure}
 	\label{fig:JSON Structure}
 \end{figure}
 
-Once the data modeling classification algorithms are selected they will be executed against all filtered and extracted results.  These results are collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.  This method of data pruning is done though jq scripts on the .json formatted results.  An example of this pruning would be iterate over all json formatted results file to separate the data for the WriteProcessMemory API using this piped query string: .behavior.processes[].calls[] | select(.api == "WriteProcessMemory").api.  The ontology of these results is structured into 13 areas described in Figure 3.2.  
+Once the data modeling classification algorithms are selected they will be executed against all filtered and extracted results.  These results are collected that analyzed the accuracy of the classifiers correctly identifying the correct APT group when all features are present.  This give us a control state in which we can experiment using various combinations of feature selection. Then we will prune features in order to identify the best combination that provided a more efficient solution than currently recognized methods.  This method of data pruning is done though jq scripts on the .json formatted results.  An example of this pruning would be iterate over all json formatted results file to separate the data for the WriteProcessMemory API using this piped query string: .behavior.processes[].calls[] | select(.api == "WriteProcessMemory").api.    
 
 \begin{figure}
 	\centering
@@ -447,9 +449,50 @@ Once the data modeling classification algorithms are selected they will be execu
 	\label{fig:Features}
 \end{figure}
 
-The info feature contains information on the time/date that the sample submitted, executed, and reported on.  Also, it provides details on Virtual Machine that sample was run on.  Signatures provides a connection between sample execution activities to potential indicators of compromise (IoC).  The target group of features gives target file details, like: name, hash, path, size, and crc checks.  The collection of network information that emanated from the execution of the sample can be viewed in the network feature.  Procmemory shows the details about different regions of the memory with their size, protection level, start and end addresses.  The static feature displays information of the binary and its parts.  Timestamp of when compiled, type of binary, resources used, language, PE sections, PE sections types, memory addresses, and level of entropy.  Dropped provides information on dropped files, hashes, pids, and yara IoC rules flagged.  The behavior collects information on processes, parent/child processes, APIs, and their actions.  Information on size, path, hash, network of items of interest in the memory buffer is contained within the buffer feature.  Debug is where raw logs from sample execution is stored.  Information about the user interface at different points during sample run can be referenced in the screenshot feature.  Strings contains extracted string from the sample.  Metadata includes information about various outputs from the sample being executed.  The scope of these json results include more than 38 million items, 1.35 million being unique, and an upper bound of 2.2 million instances.  The frequency of the total amount of reports and data point present in these thirteen different feature is displayed in Figure 3.3.
+The ontology of these results is structured into 13 areas described in Figure 3.2.  The info feature contains information on the time/date that the sample submitted, executed, and reported on.  Also, it provides details on Virtual Machine that sample was run on.  Signatures provides a connection between sample execution activities to potential indicators of compromise (IoC).  The target group of features gives target file details, like: name, hash, path, size, and crc checks.  The collection of network information that emanated from the execution of the sample can be viewed in the network feature.  Procmemory shows the details about different regions of the memory with their size, protection level, start and end addresses.  The static feature displays information of the binary and its parts.  Timestamp of when compiled, type of binary, resources used, language, PE sections, PE sections types, memory addresses, and level of entropy.  Dropped provides information on dropped files, hashes, pids, and yara IoC rules flagged.  The behavior collects information on processes, parent/child processes, APIs, and their actions.  Information on size, path, hash, network of items of interest in the memory buffer is contained within the buffer feature.  Debug is where raw logs from sample execution is stored.  Information about the user interface at different points during sample run can be referenced in the screenshot feature.  Strings contains extracted string from the sample.  Metadata includes information about various outputs from the sample being executed.  The scope of these json results include more than 38 million items, 1.35 million being unique, and an upper bound of 2.2 million instances.  The frequency of the total amount of reports and data point present in these thirteen different feature is displayed in Figure 3.3.
 
-Iterations of analysis based on different combinations of features will be used to find the most effective way to apply attribution.  Confusion matrices generated from the data classification algorithms will be used to compare accuracy and drive the iteration process of identifying features that have the greatest rate of positive change for attribution accuracy.  The Validation Section 3.4 describes a specific scenario of feature pruning, analysis, and results.
+Expert selection will be used as the starting point of iteration of features in order to apply attribution.  This expert selection contains two steps, first step is to identity unique features that assist in attribution, second step is to eliminated duplicate data from the reports that will be given to the classifiers.  Based on the ontology of the data contained within the reports there are 6 different areas that expert selection points to in Cyber Threat Intelligence reports.  Two primary references were used in building this expert selection, the source column of the overview.csv file contained within the dataset selected for this research and additional supplemental reporting.  Most of the supplemental reporting has been collected from publicly-available papers and blogs of malicious campaigns/activity/software that have been associated with vendor-defined APT that are sorted by year and their source details stored on github. \cite{APTnotes}  The 6 areas for expert selection are: function name, regkey read, filepath, mutant name, process name, and strings.
+
+APT groups 19, 21, Gorgon, and Winnti all have uniquely identify items contained within the filepath area that support attribution based on expert opinion in CTI reporting \cite{DeepPanda2013}, \cite{ExploringBergard2016}, \cite{NewDerusbiFamily2015}, \cite{APT_Attacks2013}.  APT groups 1, 28, and 29 have information contained within function name arguments and strings that aid in applying attribution \cite{APT1Mandiant2013}, \cite{SofacyActivity2018}, \cite{DukeAPTcloudLin2015}.  APT 10 and the Energetic Bear groups are identifiable by looking for references to specific regkey read attempts \cite{OperationCloudHopperIoCs2017}, \cite{CrouchingYeti2014}.  Operations by APT 30 can be identified thought the use of mutant name argument \cite{APT30IoCs2015}.  The APT group known as Dark Hotel can be identified thought the used of a specific process name \cite{DarkHotelIoCs2014}.  Equation Group can be identified though the use of an identifiable string \cite{EquationSamples2015}.
+
+Iterations of different combinations of features will be generated  in order to find the most effective way to apply attribution.  Confusion matrices generated from the data classification algorithms will be used to compare accuracy and drive the iteration process of identifying features that have the greatest rate of positive change for attribution accuracy.  The Validation Section 3.4 describes a specific scenario of feature pruning, analysis, and results.  Algorithm 1 is a pseudocode description of a novel methodology for combining Expert Selection with Genetic Algorithms (ESGA) for feature selection.
+
+\begin{algorithm}
+	\caption{Pseudocode of correlation-based ESGA method for feature selection}
+	\begin{algorithmic}[1]
+	\State \textbf{Input}{ F: original feature set}
+	\State \textbf{Input}{ N: size of feature collection}
+	\State \textbf{Input}{ D: dimension of feature}
+	\State \textbf{Output}{ S: optimal feature subset}
+	\State \textbf{Initialize}{ each individual data point in the feature collection}
+	\State \textbf{Calculate}{ the matrix R of correlation coefficients between features in F}
+	\State \textbf{Calculate}{ the contribution of each feature in F by R}
+	    \While{The termination condition of the iteration is not satisfied }
+		\For{$i=1 \textbf{ to } N$}
+			\State \textbf{Calculate}{ the fitness value of the individual data point using classifiers}
+			\State \textbf{Update}{ the historical best position of the individual data point}
+			\EndFor
+		\State \textbf{Update}{ the historical best position of the individual data point}
+		\For{$i=1 \textbf{ to } N$}
+		    \For{$i=1 \textbf{ to } D$}
+                \State \textbf{Update}{ the velocity of the individual data point}
+                \State \textbf{Update}{ the position of the individual data point combining the w value of each feature}
+		        \EndFor
+		    \EndFor
+	    \EndWhile
+	\State \textbf{Output}{ the optimal position (optimal feature subset)}
+	\end{algorithmic} 
+\end{algorithm}
+
+The pseudocode is shown in Algorithm 1, which starts with the initialization of each individual data point in the feature collection.  Then the correlation coefficients between features and the contribution of each feature in all feature sets are calculated to obtain the optimal initial value of the individual and the feature collection, as defined by lines 6 and 7.  The search process will stop and output the optimal position of the feature collection, if the process comes to a stopping condition; otherwise, it will execute circularly.  Two stopping conditions are defined—either when the error reaches the preset requirement or when the number of iterations exceeds the maximum allowable number of iterations.  Lines 8–20 define the detailed cyclic process to get the optimal feature subset, which contains updating the individual data points’ velocity and position, calculating the fitness value of the individual data point using classifiers, and updating the historical best position of the individual data point and the optimal position of the feature collection.  The optimal feature subset will be selected after finishing this cyclic process.
+
+***Expert Selection*** \\
+spaCy - Industrial-Strength Natural Language Processing in Python
+Prodigy - Radically efficient machine teaching.  An annotation tool powered by active learning.
+More information: https://spacy.io and https://prodi.gy
+
+***Genetic Algos*** \\
+
 
 \begin{comment}
 The automated analysis platform used the open source malware analysis sandbox Cuckoo.  All 3594 samples were analyzed in this platform to enable feature set extraction of network, software, user, and other data inputs.  Samples were submitted and reports were returned to the reporting infrastructure though the use of cuckoo REST API.  The average run time for the submission, execution, and collection of the raw reports was around 200 hours.  
