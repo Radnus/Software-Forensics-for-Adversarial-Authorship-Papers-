@@ -431,7 +431,15 @@ In order to prepare the results to be analyzed, cleansing needs to be executed o
 
 \subsection{Feature Pruning}
 
-The feature pruning phase sets the stage for identifying the most meaningful combinations of features required for attribution.  This research includes the identification and use of data modeling classification algorithms on the results.  The reason for the use of data modeling classification is to support a structured method for validating the results and promote future analysis by adding additional inputs into this modular framework.  In a comparison of data modeling techniques used in the research of applying attribution to threats the Random Forrest and Deep Neural Network Algorithms excelled \cite{gray2021identifying}.  Within the exploration of more than two classification algorithms, Random Forest (RF) was found to be the most suitable candidates for solving the problem due to their enhanced performance against the other techniques they tested  \cite{hong2018classifying}.  These results agree with additional research in the field: \cite{hendrikse2017effect}, \cite{caliskan2015coding}, \cite{kalgutkar2018android}, \cite{meng2016fine}, \cite{gonzalez2018authorship}.  The parameter values chosen for this data modeling classification algorithm is 100 estimators, meaning that 100 decision trees will run for this model.  Within the exploration other data modeling techniques, Deep Neural Network's showed usefulness for classifying binaries to authors better than Support Vector Machine (SVM) and Conditional Random Fields (CRFs): \cite{meng2018binary}, \cite{rosenberg2017deepapt}, \cite{rosenberg2018end}, \cite{alrabaee2019feasibility}, \cite{alrabaee2019bineye}.  The parameters values chosen for this data modeling classification algorithm is 7 layers of that range from 2000 to 500 nodes, that have a max of 250 iterations through which the data will be run.  These two data modeling classification algorithms show promise in assisting in this research.  Additionally, using more than one data modeling classification algorithm helps to fight bias present in either or the algorithms used.
+The feature pruning phase identifies the most meaningful combinations of features required for attribution.  We propose doing this by using a combination of features identified by expert selection, then Apply feature selection algorithm that improves attribution
+     run expert selection through data modeling classification algorithms, making changes, iter
+
+
+
+
+
+
+This research includes the identification and use of data modeling classification algorithms on the results.  The reason for the use of data modeling classification is to support a structured method for validating the results and promote future analysis by adding additional inputs into this modular framework.  In a comparison of data modeling techniques used in the research of applying attribution to threats the Random Forrest and Deep Neural Network Algorithms excelled \cite{gray2021identifying}.  Within the exploration of more than two classification algorithms, Random Forest (RF) was found to be the most suitable candidates for solving the problem due to their enhanced performance against the other techniques they tested  \cite{hong2018classifying}.  These results agree with additional research in the field: \cite{hendrikse2017effect}, \cite{caliskan2015coding}, \cite{kalgutkar2018android}, \cite{meng2016fine}, \cite{gonzalez2018authorship}.  The parameter values chosen for this data modeling classification algorithm is 100 estimators, meaning that 100 decision trees will run for this model.  Within the exploration other data modeling techniques, Deep Neural Network's showed usefulness for classifying binaries to authors better than Support Vector Machine (SVM) and Conditional Random Fields (CRFs): \cite{meng2018binary}, \cite{rosenberg2017deepapt}, \cite{rosenberg2018end}, \cite{alrabaee2019feasibility}, \cite{alrabaee2019bineye}.  The parameters values chosen for this data modeling classification algorithm is 7 layers of that range from 2000 to 500 nodes, that have a max of 250 iterations through which the data will be run.  These two data modeling classification algorithms show promise in assisting in this research.  Additionally, using more than one data modeling classification algorithm helps to fight bias present in either or the algorithms used.
 
 \begin{figure}
 	\centering
@@ -460,39 +468,46 @@ Iterations of different combinations of features will be generated  in order to 
 \begin{algorithm}
 	\caption{Pseudocode of correlation-based ESGA method for feature selection}
 	\begin{algorithmic}[1]
-	\State \textbf{Input}{ F: original feature set}
-	\State \textbf{Input}{ N: size of feature collection}
-	\State \textbf{Input}{ D: dimension of feature}
-	\State \textbf{Output}{ S: optimal feature subset}
-	\State \textbf{Initialize}{ each individual data point in the feature collection}
-	\State \textbf{Calculate}{ the matrix R of correlation coefficients between features in F}
-	\State \textbf{Calculate}{ the contribution of each feature in F by R}
-	    \While{The termination condition of the iteration is not satisfied }
-		\For{$i=1 \textbf{ to } N$}
-			\State \textbf{Calculate}{ the fitness value of the individual data point using classifiers}
-			\State \textbf{Update}{ the historical best position of the individual data point}
-			\EndFor
-		\State \textbf{Update}{ the historical best position of the individual data point}
-		\For{$i=1 \textbf{ to } N$}
-		    \For{$i=1 \textbf{ to } D$}
-                \State \textbf{Update}{ the velocity of the individual data point}
-                \State \textbf{Update}{ the position of the individual data point combining the w value of each feature}
-		        \EndFor
-		    \EndFor
-	    \EndWhile
-	\State \textbf{Output}{ the optimal position (optimal feature subset)}
+	\State \textbf{Input}{ F: feature, where feature = [data, velocity, dimension, weight]}  
+	\State \textbf{Input}{ E: Let $E^{expert}$ = {e : F | human\_approved(e)}
+	\State Extract keywords from $E^{expert}$
+	\State \textbf{Vector}{ $E^0$ = Use keywords to filter F}
+
+	\State \textbf{Vector}{ Let $E^{new}$ = deduplicate($E^0$)}
+
+	\State \textbf{corr\_matrix}{ = corr(F,$E^0$)}
+    	\State \textbf{Select}{ Select corr\_matrix.where(corr\_matrix.shape), k=1(bool)}
+	
+	\State \textbf{$E^{new}$}{ = Drop column for column in corr\_matrix.columns for any column $>$ 0.95}
+	
+	\State \textbf{$E^{old}$}{ = null}
+	\While{notImproving($E^{old}$,$E^{new}$):}
+		\State \textbf{Let}{ $confusionMatrix^1$ = classifier($E^{new}$)}
+		\State \textbf{Let}{ $E^{changed}$ = geneticize($E^{new}$, F)}
+	    \State \textbf{feature\_optimization\_matrix }{ = best population.accuracy(individual.X, individual.Y) from ($E^{new}$, F)}
+			\State \textbf{Apply GA\_$n^1$}{ to k=1(feature.corpa)} 
+			\State \textbf{Let $E^{changed}$}{ Select feature\_optimization\_martix.where(population.accuracy is greatest)} 
+			
+			
+    	\State \textbf{Let}{ $confusionMatrix^2$ = classifier($E^{changed}$)}
+    	\State \texbf{confusionMatrix = best($confusionMatrix^1$, $confusionMatrix^2$)}
+    	\State \textbf{$E^{old}$}{ = $E^{new}$}
+    	\State \textbf{$E^{new}$}{ = best($E^{new}$, $E^{changed}$)}
+	\EndWhile
+	\State \textbf{Output}{ $E^{new}$}
 	\end{algorithmic} 
 \end{algorithm}
 
-The pseudocode is shown in Algorithm 1, which starts with the initialization of each individual data point in the feature collection.  Then the correlation coefficients between features and the contribution of each feature in all feature sets are calculated to obtain the optimal initial value of the individual and the feature collection, as defined by lines 6 and 7.  The search process will stop and output the optimal position of the feature collection, if the process comes to a stopping condition; otherwise, it will execute circularly.  Two stopping conditions are defined—either when the error reaches the preset requirement or when the number of iterations exceeds the maximum allowable number of iterations.  Lines 8–20 define the detailed cyclic process to get the optimal feature subset, which contains updating the individual data points’ velocity and position, calculating the fitness value of the individual data point using classifiers, and updating the historical best position of the individual data point and the optimal position of the feature collection.  The optimal feature subset will be selected after finishing this cyclic process.
+The pseudocode is shown in Algorithm 1, which starts with the initialization of each individual data point in the feature collection.  Then the correlation coefficients between features and the contribution of each feature in all feature sets are calculated to obtain the improved initial value of the individual and the feature collection, as defined by lines 7 and 8.  The search process will stop and output the improved position of the feature collection, if the process comes to a stopping condition; otherwise, it will execute circularly.  Two stopping conditions are defined—either when the error reaches the preset requirement or when the number of iterations exceeds the maximum allowable number of iterations.  Lines 9–21 define the detailed cyclic process to get the improved feature subset, which contains updating the individual data points’ velocity and position, calculating the fitness value of the individual data point using classifiers, and updating the historical best position of the individual data point and the improved position of the feature collection.  The most improved feature subset will be selected after finishing this cyclic process.
 
+\begin{comment}
 ***Expert Selection*** \\
 spaCy - Industrial-Strength Natural Language Processing in Python
 Prodigy - Radically efficient machine teaching.  An annotation tool powered by active learning.
 More information: https://spacy.io and https://prodi.gy
 
 ***Genetic Algos*** \\
-
+\end{comment}
 
 \begin{comment}
 The automated analysis platform used the open source malware analysis sandbox Cuckoo.  All 3594 samples were analyzed in this platform to enable feature set extraction of network, software, user, and other data inputs.  Samples were submitted and reports were returned to the reporting infrastructure though the use of cuckoo REST API.  The average run time for the submission, execution, and collection of the raw reports was around 200 hours.  
