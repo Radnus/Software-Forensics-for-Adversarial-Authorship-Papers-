@@ -469,32 +469,33 @@ Iterations of different combinations of features will be generated  in order to 
 	\caption{Pseudocode of correlation-based ESGA method for feature selection}
 	\begin{algorithmic}[1]
 	\State \textbf{Input}{ F: feature, where feature = [data, velocity, dimension, weight]}  
-	\State \textbf{Input}{ E: Let $E^{expert}$ = {e : F | human\_approved(e)}
-	\State Extract keywords from $E^{expert}$
-	\State \textbf{Vector}{ $E^0$ = Use keywords to filter F}
+	\State \textbf{Input}{ E: Let $E_{expert}$ = {e : F | human\_approved(e)}
+	\State Extract keywords from $E_{expert}$
+	\State { $E_0$ = Use keywords to filter F}
 
-	\State \textbf{Vector}{ Let $E^{new}$ = deduplicate($E^0$)}
+	\State { Let $E_{new}$ = deduplicate($E_0$)}
 
-	\State \textbf{corr\_matrix}{ = corr(F,$E^0$)}
+	\State \textbf{corr\_matrix}{ = corr(F,$E_0$)}
     	\State \textbf{Select}{ Select corr\_matrix.where(corr\_matrix.shape), k=1(bool)}
 	
-	\State \textbf{$E^{new}$}{ = Drop column for column in corr\_matrix.columns for any column $>$ 0.95}
+	\State \textbf{$E_{new}$}{ = Drop column for column in corr\_matrix.columns for any column $>$ 0.95}
 	
-	\State \textbf{$E^{old}$}{ = null}
-	\While{notImproving($E^{old}$,$E^{new}$):}
-		\State \textbf{Let}{ $confusionMatrix^1$ = classifier($E^{new}$)}
-		\State \textbf{Let}{ $E^{changed}$ = geneticize($E^{new}$, F)}
-	    \State \textbf{feature\_optimization\_matrix }{ = best population.accuracy(individual.X, individual.Y) from ($E^{new}$, F)}
-			\State \textbf{Apply GA\_$n^1$}{ to k=1(feature.corpa)} 
-			\State \textbf{Let $E^{changed}$}{ Select feature\_optimization\_martix.where(population.accuracy is greatest)} 
+	\State \textbf{$E_{old}$}{ = null}
+	\While{notImproving($E_{old}$,$E_{new}$):}
+	    \State \textbf{Repeat} {notImproving}{ $i=0$ \TO $3$ where population.accuracy -1\%}
+		\State \textbf{Let}{ $confusionMatrix_1$ = classifier($E_{new}$)}
+		\State \textbf{Let}{ $E_{changed}$ = geneticize($E_{new}$, F)}
+	    \State \textbf{feature\_optimization\_matrix }{ = best population.accuracy(individual.X, individual.Y) from ($E_{new}$, F)}
+			\State \textbf{Apply GA to k=1(feature)} 
+			\State \textbf{Let $E_{changed}$}{ Select feature\_optimization\_martix.where(population.accuracy is greatest)} 
 			
-			
-    	\State \textbf{Let}{ $confusionMatrix^2$ = classifier($E^{changed}$)}
-    	\State \texbf{confusionMatrix = best($confusionMatrix^1$, $confusionMatrix^2$)}
-    	\State \textbf{$E^{old}$}{ = $E^{new}$}
-    	\State \textbf{$E^{new}$}{ = best($E^{new}$, $E^{changed}$)}
+    	\State \textbf{Let}{ $confusionMatrix_2$ = classifier($E_{changed}$)}
+    	\State \texbf{confusionMatrix = best($confusionMatrix_1$, $confusionMatrix_2$)}
+    	\State \textbf{$E_{old}$}{ = $E_{new}$}
+    	\State \textbf{$E_{new}$}{ = best($E_{new}$, $E_{changed}$)}
 	\EndWhile
-	\State \textbf{Output}{ $E^{new}$}
+
+	\State \textbf{Output}{ $E_{new}$}
 	\end{algorithmic} 
 \end{algorithm}
 
@@ -534,7 +535,9 @@ DU comments on last paraphgraph within 'Research Idea' = "while this is a good 1
 \end{comment}
 
 \section{Research Hypothesis} 
-The research hypothesis is ``the multidimensional software correlation mapping technique of feature selection will be more efficient than current recognized methods in applying cyber threat attribution''. The null hypothesis of this research is ``the multidimensional software correlation mapping technique will be as efficient or less efficient than current recognized methods in applying cyber threat attribution''.
+The research hypothesis is ``the expert selection correlation mapping technique of feature selection using genetic algorithms will be more efficient than current recognized methods in applying cyber threat attribution''. The null hypothesis of this research is ``the expert selection correlation mapping technique of feature selection using genetic algorithms will be as efficient or less efficient than current recognized methods in applying cyber threat attribution''.
+
+This hypothesis will be validated using the correlation-based ESGA method for feature selection algorithm described in the research plan and use case described in the validation section.  The algorithm consists of three main parts.  First part is the collection of expert selection that has specific domain experience within this area and the comparison of those selections to data that is similar within the data collected.  A configurable variable of 95\% is used to in this research, but can be modified to meet the needs of other research.  The reason for this is to reduce unneeded duplication of data that will not assist with this research.  The second part is the initialization and recurrence of measurements for cyber threat attribution accuracy based on a genetic algorithm being applied to the de-duplicated data.  A configurable repeat until clause stop the recursion based on measurements gain from multiple control runs on all features being available.  For this research this clause is configured to trigger when 3 consecutive runs happen in which a -1\% accuracy is observed though the application of the genetic algorithm.  The last part is the building and reporting of a confusion matrix in order to graphically display the results to humans and allow for further research to be developed and tested.
 
 \begin{comment}
 
